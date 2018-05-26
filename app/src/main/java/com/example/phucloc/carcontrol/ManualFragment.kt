@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_manual.view.*
 
-class ManualFragment : Fragment(), View.OnTouchListener {
+class ManualFragment : Fragment(), View.OnTouchListener, View.OnClickListener {
 
     private lateinit var rootView: View
 
@@ -38,18 +38,7 @@ class ManualFragment : Fragment(), View.OnTouchListener {
         rootView.ic_down.setOnTouchListener(this)
         rootView.ic_left.setOnTouchListener(this)
         rootView.ic_right.setOnTouchListener(this)
-        rootView.ic_speaker.setOnTouchListener(this)
-        rootView.ic_light.setOnClickListener {
-            if (MainActivity.isConnected) {
-                if (rootView.ic_light.alpha == 0.5f) {
-                    rootView.ic_light.alpha = 1f
-                    MainActivity.dataThread.write("7".toByteArray())
-                } else {
-                    rootView.ic_light.alpha = 0.5f
-                    MainActivity.dataThread.write("8".toByteArray())
-                }
-            }
-        }
+        rootView.ic_light.setOnClickListener(this)
         return rootView
     }
 
@@ -75,5 +64,17 @@ class ManualFragment : Fragment(), View.OnTouchListener {
             }
         }
         return true
+    }
+
+    override fun onClick(v: View?) {
+        if (v == rootView.ic_light && MainActivity.isConnected) {
+            if (rootView.ic_light.alpha == 0.5f) {
+                rootView.ic_light.alpha = 1f
+                MainActivity.dataThread.write("7".toByteArray())
+            } else {
+                rootView.ic_light.alpha = 0.5f
+                MainActivity.dataThread.write("8".toByteArray())
+            }
+        }
     }
 }

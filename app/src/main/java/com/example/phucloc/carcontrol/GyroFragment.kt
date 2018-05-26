@@ -13,8 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_gyro.*
+import kotlinx.android.synthetic.main.fragment_gyro.view.*
 
-class GyroFragment : Fragment(), SensorEventListener {
+class GyroFragment : Fragment(), SensorEventListener, View.OnClickListener {
 
     private lateinit var rootView: View
     private lateinit var rotationSensor: Sensor
@@ -24,7 +25,7 @@ class GyroFragment : Fragment(), SensorEventListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_gyro, container, false)
-
+        rootView.ic_light.setOnClickListener(this)
         initSensor()
         return rootView
     }
@@ -70,21 +71,33 @@ class GyroFragment : Fragment(), SensorEventListener {
         val y = orientations[1]
         val z = orientations[2]
 
-        if (z < -45) {
+        if (z < -30) {
             txt_status.setText("Forward")
             MainActivity.dataThread.write(Constant.COMMAND_FORWARD.toByteArray())
-        } else if (z > 45) {
+        } else if (z > 30) {
             txt_status.setText("Backward")
             MainActivity.dataThread.write(Constant.COMMAND_BACKWARD.toByteArray())
-        } else if (y < -45) {
+        } else if (y < -30) {
             txt_status.setText("Left")
             MainActivity.dataThread.write(Constant.COMMAND_LEFT.toByteArray())
-        } else if (y > 45) {
+        } else if (y > 30) {
             txt_status.setText("Right")
             MainActivity.dataThread.write(Constant.COMMAND_RIGHT.toByteArray())
         } else {
             txt_status.setText("Stop")
             MainActivity.dataThread.write(Constant.COMMAND_STOP.toByteArray())
+        }
+    }
+
+    override fun onClick(v: View?) {
+        if (v == rootView.ic_light && MainActivity.isConnected) {
+            if (rootView.ic_light.alpha == 0.5f) {
+                rootView.ic_light.alpha = 1f
+                MainActivity.dataThread.write("7".toByteArray())
+            } else {
+                rootView.ic_light.alpha = 0.5f
+                MainActivity.dataThread.write("8".toByteArray())
+            }
         }
     }
 }
