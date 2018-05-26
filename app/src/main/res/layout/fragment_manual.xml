@@ -7,20 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ManualFragment">
 
-    <Button
-        android:id="@+id/btn_scan_device"
-        android:layout_width="130dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:text="Scan devices"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/ic_up"
         android:layout_width="70dp"

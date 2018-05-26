@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,6 @@
         <activity
             android:name=".DeviceListActivity"
             android:label="@string/title_activity_device_list"
-            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

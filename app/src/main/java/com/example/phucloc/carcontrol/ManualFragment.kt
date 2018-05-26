@@ -13,10 +13,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_manual.view.*
 
-class ManualFragment : Fragment(), DataConnectedThread.OnRunInUIListener, ConnectBlueToothDeviceThread.OnRunInUIListener, View.OnTouchListener {
+class ManualFragment : Fragment(), View.OnTouchListener {
 
-    private lateinit var dataThread: DataConnectedThread
-    private var isConnected = false
     private lateinit var rootView: View
 
     companion object {
@@ -41,70 +39,37 @@ class ManualFragment : Fragment(), DataConnectedThread.OnRunInUIListener, Connec
         rootView.ic_left.setOnTouchListener(this)
         rootView.ic_right.setOnTouchListener(this)
         rootView.ic_speaker.setOnTouchListener(this)
-        rootView.btn_scan_device.setOnClickListener {
-            val intent = Intent(activity, DeviceListActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE)
-        }
         rootView.ic_light.setOnClickListener {
-            if (this.isConnected) {
+            if (MainActivity.isConnected) {
                 if (rootView.ic_light.alpha == 0.5f) {
                     rootView.ic_light.alpha = 1f
-                    this.dataThread.write("7".toByteArray())
+                    MainActivity.dataThread.write("7".toByteArray())
                 } else {
                     rootView.ic_light.alpha = 0.5f
-                    this.dataThread.write("8".toByteArray())
+                    MainActivity.dataThread.write("8".toByteArray())
                 }
             }
         }
         return rootView
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK && data != null) {
-                val device = data.extras.getParcelable<BluetoothDevice>(EXTRA_DEVICE)
-                Toast.makeText(activity, device.name, Toast.LENGTH_SHORT).show()
-                this.startThread(device)
-            }
-        }
-    }
-
-    fun startThread(device: BluetoothDevice) {
-        val uuid = device.uuids[0].uuid
-        val thread = ConnectBlueToothDeviceThread(device, uuid, this)
-        thread.start()
-    }
-
-    override fun onNeedToast(message: String) {
-        activity.runOnUiThread() {
-            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun startThreadConnected(bluetoothSocket: BluetoothSocket) {
-        this.dataThread = DataConnectedThread(bluetoothSocket, this)
-        this.dataThread.start()
-        this.isConnected = true
-    }
-
     override fun onTouch(view: View, event: MotionEvent): Boolean {
-        if (this.isConnected) {
+        if (MainActivity.isConnected) {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     when (view) {
-                        rootView.ic_up -> this.dataThread.write(Constant.COMMAND_FORWARD.toByteArray())
-                        rootView.ic_down -> this.dataThread.write(Constant.COMMAND_BACKWARD.toByteArray())
-                        rootView.ic_left -> this.dataThread.write(Constant.COMMAND_LEFT.toByteArray())
-                        rootView.ic_right -> this.dataThread.write(Constant.COMMAND_RIGHT.toByteArray())
+                        rootView.ic_up -> MainActivity.dataThread.write(Constant.COMMAND_FORWARD.toByteArray())
+                        rootView.ic_down -> MainActivity.dataThread.write(Constant.COMMAND_BACKWARD.toByteArray())
+                        rootView.ic_left -> MainActivity.dataThread.write(Constant.COMMAND_LEFT.toByteArray())
+                        rootView.ic_right -> MainActivity.dataThread.write(Constant.COMMAND_RIGHT.toByteArray())
                     }
                 }
                 MotionEvent.ACTION_UP -> {
                     when (view) {
-                        rootView.ic_up -> this.dataThread.write("0".toByteArray())
-                        rootView.ic_down -> this.dataThread.write("0".toByteArray())
-                        rootView.ic_left -> this.dataThread.write("0".toByteArray())
-                        rootView.ic_right -> this.dataThread.write("0".toByteArray())
+                        rootView.ic_up -> MainActivity.dataThread.write("0".toByteArray())
+                        rootView.ic_down -> MainActivity.dataThread.write("0".toByteArray())
+                        rootView.ic_left -> MainActivity.dataThread.write("0".toByteArray())
+                        rootView.ic_right -> MainActivity.dataThread.write("0".toByteArray())
                     }
                 }
             }
