@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ManualFragment">
+
+    <Button
+        android:id="@+id/btn_scan_device"
+        android:layout_width="130dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Scan devices"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ic_up"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/ic_triangle_up"
+        app:layout_constraintBottom_toTopOf="@+id/ic_round"
+        app:layout_constraintEnd_toEndOf="@+id/ic_round"
+        app:layout_constraintStart_toStartOf="@+id/ic_round" />
+
+    <ImageView
+        android:id="@+id/ic_down"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/ic_triangle_down"
+        app:layout_constraintEnd_toEndOf="@+id/ic_round"
+        app:layout_constraintStart_toStartOf="@+id/ic_round"
+        app:layout_constraintTop_toBottomOf="@+id/ic_round" />
+
+    <ImageView
+        android:id="@+id/ic_left"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:src="@mipmap/ic_triangle_left"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_round"
+        app:layout_constraintEnd_toStartOf="@+id/ic_round"
+        app:layout_constraintTop_toTopOf="@+id/ic_round" />
+
+    <ImageView
+        android:id="@+id/ic_right"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:src="@mipmap/ic_triangle_right"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_round"
+        app:layout_constraintStart_toEndOf="@+id/ic_round"
+        app:layout_constraintTop_toTopOf="@+id/ic_round" />
+
+    <ImageView
+        android:id="@+id/ic_round"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@mipmap/ic_round"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.699" />
+
+    <ImageView
+        android:id="@+id/ic_light"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="50dp"
+        android:alpha="0.5"
+        android:src="@mipmap/ic_light"
+        app:layout_constraintBottom_toTopOf="@+id/ic_speaker"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/ic_speaker"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="50dp"
+        android:src="@mipmap/ic_speaker"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Created by Phuc Loc"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

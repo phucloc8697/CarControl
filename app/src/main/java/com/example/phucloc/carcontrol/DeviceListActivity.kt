@@ -51,7 +51,7 @@ class DeviceListActivity : AppCompatActivity(), DeviceAdapter.OnItemClickListene
 
     override fun onItemClick(device: BluetoothDevice) {
         val intent = Intent()
-        intent.putExtra(MainActivity.EXTRA_DEVICE, device)
+        intent.putExtra(ManualFragment.EXTRA_DEVICE, device)
         setResult(Activity.RESULT_OK, intent)
         finish()
     }
